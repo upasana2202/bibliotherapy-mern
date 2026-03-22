@@ -1,0 +1,380 @@
+{
+  "info": {
+    "name": "Bibliotherapy API - Complete",
+    "_postman_id": "bibliotherapy-api-complete",
+    "description": "Complete API including Books, Chat and Authentication.\n\nBase URL: http://localhost:5000\n\nWorkflow:\n1. Register or Login to get token\n2. Copy token → paste in Environment as {{token}}\n3. All protected routes use Bearer {{token}} automatically",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000", "type": "string" },
+    { "key": "token", "value": "", "type": "string", "description": "Paste your JWT token here after login" }
+  ],
+  "item": [
+    {
+      "name": "🏥 Health Check",
+      "item": [
+        {
+          "name": "Server Health",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/health", "host": ["{{baseUrl}}"], "path": ["api","health"] },
+            "description": "Run this first to confirm server is running. Expect: { status: 'ok' }"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔐 Authentication",
+      "description": "Register, login, and manage your account.\n\nWorkflow:\n1. Register → copy token from response\n2. Set token variable at top of collection\n3. Use protected routes",
+      "item": [
+        {
+          "name": "Register",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": ["if (pm.response.code === 201) {", "  const res = pm.response.json();", "  pm.collectionVariables.set('token', res.token);", "  console.log('Token saved automatically!');", "}"],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/auth/register", "host": ["{{baseUrl}}"], "path": ["api","auth","register"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Arjun Sharma\",\n  \"email\": \"arjun@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "description": "Create a new account. Token is automatically saved to collection variables after success."
+          }
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": ["if (pm.response.code === 200) {", "  const res = pm.response.json();", "  pm.collectionVariables.set('token', res.token);", "  console.log('Token saved automatically!');", "}"],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/auth/login", "host": ["{{baseUrl}}"], "path": ["api","auth","login"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"arjun@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "description": "Login with email and password. Token is automatically saved."
+          }
+        },
+        {
+          "name": "Get My Profile",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/api/auth/me", "host": ["{{baseUrl}}"], "path": ["api","auth","me"] },
+            "description": "Get current logged in user's profile, favourites and reading list. Requires token."
+          }
+        },
+        {
+          "name": "Toggle Favourite Book",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/api/auth/favourites/10", "host": ["{{baseUrl}}"], "path": ["api","auth","favourites","10"] },
+            "description": "Toggle favourite on/off for book ID 10 (Man's Search for Meaning). Change ID to any book 1-100. Calling again removes it."
+          }
+        },
+        {
+          "name": "Add to Reading List - Want to Read",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}/api/auth/reading-list/15", "host": ["{{baseUrl}}"], "path": ["api","auth","reading-list","15"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"want\"\n}"
+            },
+            "description": "Add book ID 15 (Reasons to Stay Alive) to reading list with status 'want'"
+          }
+        },
+        {
+          "name": "Update Reading Status - Currently Reading",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}/api/auth/reading-list/15", "host": ["{{baseUrl}}"], "path": ["api","auth","reading-list","15"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"reading\"\n}"
+            },
+            "description": "Update book 15 status to 'reading'. Statuses: want | reading | finished | remove"
+          }
+        },
+        {
+          "name": "Mark Book as Finished",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}/api/auth/reading-list/15", "host": ["{{baseUrl}}"], "path": ["api","auth","reading-list","15"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"finished\"\n}"
+            },
+            "description": "Mark book 15 as finished"
+          }
+        },
+        {
+          "name": "Remove from Reading List",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}/api/auth/reading-list/15", "host": ["{{baseUrl}}"], "path": ["api","auth","reading-list","15"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"remove\"\n}"
+            },
+            "description": "Remove book 15 from reading list entirely"
+          }
+        },
+        {
+          "name": "Save Chat History",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}/api/auth/chat-history", "host": ["{{baseUrl}}"], "path": ["api","auth","chat-history"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"messages\": [\n    { \"role\": \"user\", \"content\": \"I feel anxious\" },\n    { \"role\": \"assistant\", \"content\": \"I hear you. Here are some books that might help...\" }\n  ]\n}"
+            },
+            "description": "Save chat history for logged in user. Frontend does this automatically."
+          }
+        }
+      ]
+    },
+    {
+      "name": "📚 Books — Browse & Filter",
+      "item": [
+        {
+          "name": "Get All Books",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/books", "host": ["{{baseUrl}}"], "path": ["api","books"] },
+            "description": "Returns all 100 books"
+          }
+        },
+        {
+          "name": "Filter by Mood",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/books?mood=grief",
+              "host": ["{{baseUrl}}"], "path": ["api","books"],
+              "query": [{ "key": "mood", "value": "grief", "description": "Try: grief, anxiety, loneliness, hope, depression, joy, trauma, healing, peace, love, purpose, resilience, identity, wonder, fear, courage, shame, meaning, solitude, nature, happiness, adventure, wisdom, creativity" }]
+            }
+          }
+        },
+        {
+          "name": "Filter by Genre",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/books?genre=memoir",
+              "host": ["{{baseUrl}}"], "path": ["api","books"],
+              "query": [{ "key": "genre", "value": "memoir", "description": "memoir | fiction | self-help | non-fiction | spiritual | poetry" }]
+            }
+          }
+        },
+        {
+          "name": "Search Books",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/books?search=Brene Brown",
+              "host": ["{{baseUrl}}"], "path": ["api","books"],
+              "query": [{ "key": "search", "value": "Brene Brown" }]
+            }
+          }
+        },
+        {
+          "name": "Filter by Difficulty",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/books?difficulty=easy",
+              "host": ["{{baseUrl}}"], "path": ["api","books"],
+              "query": [{ "key": "difficulty", "value": "easy", "description": "easy | moderate | challenging" }]
+            }
+          }
+        },
+        {
+          "name": "Top Rated Books",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/books?sort=rating&min_rating=4.8",
+              "host": ["{{baseUrl}}"], "path": ["api","books"],
+              "query": [{ "key": "sort", "value": "rating" }, { "key": "min_rating", "value": "4.8" }]
+            }
+          }
+        },
+        {
+          "name": "Shortest Books",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/books?sort=pages_asc&limit=5",
+              "host": ["{{baseUrl}}"], "path": ["api","books"],
+              "query": [{ "key": "sort", "value": "pages_asc" }, { "key": "limit", "value": "5" }]
+            }
+          }
+        },
+        {
+          "name": "Combined Filters",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/books?mood=healing&difficulty=easy&sort=rating&limit=3",
+              "host": ["{{baseUrl}}"], "path": ["api","books"],
+              "query": [
+                { "key": "mood", "value": "healing" },
+                { "key": "difficulty", "value": "easy" },
+                { "key": "sort", "value": "rating" },
+                { "key": "limit", "value": "3" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Book by ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/books/1", "host": ["{{baseUrl}}"], "path": ["api","books","1"] },
+            "description": "Get full details for one book. Change 1 to any ID (1-100)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔍 Books — Metadata",
+      "item": [
+        {
+          "name": "All Moods (with counts)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/books/moods", "host": ["{{baseUrl}}"], "path": ["api","books","moods"] }
+          }
+        },
+        {
+          "name": "All Genres (with counts)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/books/genres", "host": ["{{baseUrl}}"], "path": ["api","books","genres"] }
+          }
+        },
+        {
+          "name": "Library Stats",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/books/stats", "host": ["{{baseUrl}}"], "path": ["api","books","stats"] }
+          }
+        },
+        {
+          "name": "Recommendations by Mood",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/books/recommendations?mood=anxiety&limit=4",
+              "host": ["{{baseUrl}}"], "path": ["api","books","recommendations"],
+              "query": [{ "key": "mood", "value": "anxiety" }, { "key": "limit", "value": "4" }]
+            }
+          }
+        },
+        {
+          "name": "Legacy Moods",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/moods", "host": ["{{baseUrl}}"], "path": ["api","moods"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "💬 Chat (Sage AI)",
+      "item": [
+        {
+          "name": "First Message",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/chat", "host": ["{{baseUrl}}"], "path": ["api","chat"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"I've been feeling really anxious lately\",\n  \"history\": []\n}"
+            },
+            "description": "First message — always send history as empty array []"
+          }
+        },
+        {
+          "name": "Continue Conversation",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/chat", "host": ["{{baseUrl}}"], "path": ["api","chat"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Can you recommend something shorter?\",\n  \"history\": [\n    { \"role\": \"user\", \"content\": \"I've been feeling really anxious lately\" },\n    { \"role\": \"assistant\", \"content\": \"I'd recommend The Power of Now by Eckhart Tolle...\" }\n  ]\n}"
+            },
+            "description": "Add previous messages to history[] to maintain conversation context"
+          }
+        },
+        {
+          "name": "Grief Message",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/chat", "host": ["{{baseUrl}}"], "path": ["api","chat"] },
+            "body": { "mode": "raw", "raw": "{\n  \"message\": \"I recently lost someone close to me\",\n  \"history\": []\n}" }
+          }
+        },
+        {
+          "name": "Depression Message",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/chat", "host": ["{{baseUrl}}"], "path": ["api","chat"] },
+            "body": { "mode": "raw", "raw": "{\n  \"message\": \"I feel empty and nothing brings me joy\",\n  \"history\": []\n}" }
+          }
+        },
+        {
+          "name": "Hope Message",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/api/chat", "host": ["{{baseUrl}}"], "path": ["api","chat"] },
+            "body": { "mode": "raw", "raw": "{\n  \"message\": \"I want books that inspire hope and resilience\",\n  \"history\": []\n}" }
+          }
+        }
+      ]
+    }
+  ]
+}

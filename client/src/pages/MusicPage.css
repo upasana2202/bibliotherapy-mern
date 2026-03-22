@@ -1,0 +1,338 @@
+.music-page {
+  padding: 5rem 2rem 2rem;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.music-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.music-header h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+
+.music-intro {
+  max-width: 640px;
+  margin: 0 auto;
+  color: var(--ink-light);
+  font-size: 1.1rem;
+  line-height: 1.8;
+  font-style: italic;
+}
+
+/* Genre Cards Grid */
+.genre-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.genre-full-card {
+  background: white;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 2px solid transparent;
+  transition: all 0.25s ease;
+}
+
+.genre-full-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-deep);
+}
+
+.genre-full-card.active {
+  border-color: var(--card-color);
+}
+
+.genre-card-header {
+  padding: 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  position: relative;
+}
+
+.genre-big-emoji {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.genre-card-header h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+}
+
+.genre-card-header p {
+  font-size: 0.85rem;
+  color: var(--sage);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.now-playing-badge {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: white;
+  background: var(--forest);
+  padding: 0.15rem 0.5rem;
+  border-radius: 10px;
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.genre-tracks {
+  padding: 0.5rem 1.25rem;
+  border-top: 1px solid rgba(28, 18, 8, 0.05);
+}
+
+.track-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(28, 18, 8, 0.04);
+}
+
+.track-row:last-child { border-bottom: none; }
+
+.track-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.track-artist {
+  font-size: 0.78rem;
+  color: var(--sage);
+  font-style: italic;
+}
+
+.track-duration {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--sage-light);
+}
+
+.genre-play-btn {
+  display: block;
+  width: 100%;
+  padding: 0.9rem;
+  border: none;
+  background: var(--ink);
+  color: var(--parchment);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  letter-spacing: 0.02em;
+}
+
+.genre-play-btn:hover { background: var(--accent); }
+.genre-play-btn.playing { background: var(--forest); }
+
+/* Music Note */
+.music-note {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  background: rgba(201, 162, 39, 0.08);
+  border: 1px solid rgba(201, 162, 39, 0.2);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.music-note-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.music-note h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+
+.music-note p {
+  font-size: 0.92rem;
+  color: var(--ink-light);
+  line-height: 1.7;
+}
+
+/* Therapy Info */
+.therapy-info {
+  padding: 4rem 0;
+  border-top: 1px solid rgba(28, 18, 8, 0.08);
+}
+
+.therapy-info h2 {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+.therapy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.therapy-card {
+  padding: 1.5rem;
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.therapy-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.therapy-card h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--ink);
+}
+
+.therapy-card p {
+  font-size: 0.9rem;
+  color: var(--ink-light);
+  line-height: 1.7;
+}
+
+/* Now Playing Banner */
+.now-playing-banner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: linear-gradient(135deg, #1C1208, #2D1A0E);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(201, 162, 39, 0.2);
+  flex-wrap: wrap;
+}
+
+.np-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.np-pulse {
+  width: 12px;
+  height: 12px;
+  background: #6EE7B7;
+  border-radius: 50%;
+  animation: pulse 1.5s ease infinite;
+  flex-shrink: 0;
+}
+
+.np-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #6EE7B7;
+  margin-bottom: 0.2rem;
+}
+
+.np-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #F5EFE0;
+}
+
+.np-artist {
+  font-size: 0.82rem;
+  color: rgba(245,239,224,0.6);
+  font-style: italic;
+}
+
+.np-genre {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  color: var(--ink);
+}
+
+.np-toggle {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  color: #F5EFE0;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.np-toggle:hover {
+  background: rgba(255,255,255,0.18);
+}
+
+/* Active track highlight */
+.track-row.active-track {
+  background: rgba(110, 231, 183, 0.08);
+  border-radius: 6px;
+}
+
+.track-row.active-track .track-title {
+  color: #6EE7B7 !important;
+}
+
+.track-num {
+  width: 20px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--sage-light);
+  flex-shrink: 0;
+}
+
+.eq-icon {
+  color: #6EE7B7;
+  animation: pulse 1s ease infinite;
+  font-size: 1rem;
+}
+
+.genre-tracks {
+  padding: 0.5rem 1.25rem;
+  border-top: 1px solid rgba(28, 18, 8, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.track-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.45rem 0.4rem;
+  transition: background 0.2s;
+}

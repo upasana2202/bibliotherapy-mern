@@ -1,0 +1,529 @@
+.library-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 8rem;
+}
+
+/* ─── HEADER ─────────────────────────────────── */
+.library-header {
+  margin-bottom: 2.5rem;
+}
+
+.library-header-text {
+  margin-bottom: 1.5rem;
+}
+
+.library-header-text h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+
+.library-header-text p {
+  color: var(--sage);
+  font-style: italic;
+  font-size: 1rem;
+}
+
+.library-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: white;
+  border: 1.5px solid rgba(28,18,8,0.12);
+  border-radius: 12px;
+  padding: 0.6rem 1rem;
+  max-width: 360px;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink);
+  flex: 1;
+}
+
+.search-box input::placeholder { color: rgba(28,18,8,0.35); }
+
+.mood-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.mood-filter-btn {
+  padding: 0.3rem 0.85rem;
+  border-radius: 20px;
+  border: 1.5px solid rgba(28,18,8,0.12);
+  background: white;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--sage);
+  transition: all 0.2s;
+  font-family: var(--font-body);
+}
+
+.mood-filter-btn:hover { border-color: var(--sage); color: var(--ink); }
+.mood-filter-btn.active {
+  background: var(--ink);
+  color: var(--parchment);
+  border-color: var(--ink);
+}
+
+/* ─── BOOK COUNT ─────────────────────────────── */
+.book-count {
+  font-size: 0.85rem;
+  color: var(--sage);
+  margin-bottom: 1.5rem;
+  font-family: var(--font-mono);
+}
+
+.book-count em { font-style: italic; }
+
+/* ─── BOOKS GRID ─────────────────────────────── */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.book-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(28,18,8,0.06);
+  border: 1px solid rgba(28,18,8,0.06);
+  display: flex;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  animation: fadeInUp 0.4s ease both;
+  animation-delay: var(--delay, 0s);
+}
+
+.book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(28,18,8,0.12);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.book-spine {
+  width: 6px;
+  flex-shrink: 0;
+}
+
+.book-content {
+  padding: 1.1rem 1.1rem 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.book-genre-tag {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--sage);
+  background: rgba(90,122,92,0.1);
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
+  display: inline-block;
+  width: fit-content;
+}
+
+.book-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+  margin-top: 0.2rem;
+}
+
+.book-author {
+  font-size: 0.82rem;
+  color: var(--sage);
+  font-style: italic;
+}
+
+.book-desc {
+  font-size: 0.83rem;
+  color: rgba(28,18,8,0.65);
+  line-height: 1.5;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.book-music {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: var(--sage);
+  font-style: italic;
+  margin-top: 0.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.book-moods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.3rem;
+}
+
+.book-mood-tag {
+  font-size: 0.7rem;
+  background: rgba(28,18,8,0.05);
+  color: rgba(28,18,8,0.55);
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.book-mood-tag:hover {
+  background: rgba(90,122,92,0.1);
+  color: var(--sage);
+  border-color: rgba(90,122,92,0.2);
+}
+
+/* ─── BOOK CARD AUTH ACTIONS ─────────────────── */
+.book-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+.card-fav-btn {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.2rem;
+  border-radius: 6px;
+  transition: transform 0.2s;
+  line-height: 1;
+}
+
+.card-fav-btn:hover { transform: scale(1.2); }
+.card-fav-btn.active { animation: heartPop 0.3s ease; }
+
+@keyframes heartPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+.book-preview-hint {
+  font-size: 0.72rem;
+  color: var(--sage);
+  font-style: italic;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.book-card:hover .book-preview-hint { opacity: 1; }
+
+/* ─── LOADING ─────────────────────────────────── */
+.library-loading {
+  text-align: center;
+  padding: 4rem;
+  color: var(--sage);
+}
+
+.loading-spinner {
+  font-size: 2.5rem;
+  animation: spin 2s linear infinite;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ─── NO RESULTS ──────────────────────────────── */
+.no-books {
+  text-align: center;
+  padding: 3rem;
+  color: var(--sage);
+  font-style: italic;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 1rem;
+}
+
+/* ─── MODAL ───────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(28,18,8,0.7);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modal-card {
+  background: var(--parchment);
+  border-radius: 20px;
+  max-width: 640px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 24px 80px rgba(28,18,8,0.35);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(28,18,8,0.08);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  z-index: 1;
+}
+.modal-close:hover { background: rgba(28,18,8,0.15); }
+
+.modal-header {
+  display: flex;
+  gap: 1.25rem;
+  padding: 2rem 2rem 1.25rem;
+  border-bottom: 1px solid rgba(28,18,8,0.08);
+}
+
+.modal-spine {
+  width: 8px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  min-height: 80px;
+}
+
+.modal-genre-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--sage);
+  background: rgba(90,122,92,0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.modal-title-block h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+  line-height: 1.2;
+}
+
+.modal-author {
+  color: var(--sage);
+  font-style: italic;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.modal-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: rgba(28,18,8,0.5);
+  font-family: var(--font-mono);
+  flex-wrap: wrap;
+}
+
+.modal-body {
+  padding: 1.5rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.modal-body h4 {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+.modal-summary {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--ink);
+}
+
+.modal-theme-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.modal-theme-tag {
+  background: rgba(90,122,92,0.1);
+  color: var(--sage);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.25rem 0.7rem;
+  border-radius: 20px;
+  border: 1px solid rgba(90,122,92,0.2);
+}
+
+.modal-music {
+  background: rgba(201,162,39,0.08);
+  border-left: 3px solid var(--gold);
+  padding: 0.75rem 1rem;
+  border-radius: 0 8px 8px 0;
+}
+
+.modal-music p {
+  font-style: italic;
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
+.modal-moods { }
+
+/* ─── MODAL AUTH ACTIONS ─────────────────────── */
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(28,18,8,0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(28,18,8,0.06);
+}
+
+.modal-fav-btn {
+  background: white;
+  border: 1.5px solid rgba(28,18,8,0.12);
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--ink);
+  font-family: var(--font-body);
+  text-align: left;
+}
+.modal-fav-btn:hover { border-color: #ef4444; }
+.modal-fav-btn.active {
+  background: #fef2f2;
+  border-color: #ef4444;
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.modal-reading-btns {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.modal-status-btn {
+  flex: 1;
+  background: white;
+  border: 1.5px solid rgba(28,18,8,0.1);
+  border-radius: 10px;
+  padding: 0.5rem 0.5rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--sage);
+  font-family: var(--font-body);
+  white-space: nowrap;
+  text-align: center;
+}
+.modal-status-btn:hover { border-color: var(--sage); color: var(--ink); }
+.modal-status-btn.active {
+  background: var(--ink);
+  color: var(--parchment);
+  border-color: var(--ink);
+  font-weight: 600;
+}
+
+.modal-auth-hint {
+  font-size: 0.82rem;
+  color: var(--sage);
+  text-align: center;
+  font-style: italic;
+}
+.modal-auth-hint button {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 0.82rem;
+}
+
+/* ─── RESPONSIVE ──────────────────────────────── */
+@media (max-width: 768px) {
+  .books-grid { grid-template-columns: 1fr; }
+  .modal-overlay { padding: 1rem; }
+  .modal-card { max-height: 92vh; }
+  .modal-header { padding: 1.5rem 1.25rem 1rem; }
+  .modal-body { padding: 1.25rem 1.25rem 1.5rem; }
+  .modal-title-block h2 { font-size: 1.2rem; }
+  .modal-reading-btns { flex-direction: column; }
+  .modal-status-btn { flex: unset; }
+}

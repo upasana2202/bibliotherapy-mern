@@ -1,0 +1,15 @@
+{
+  "name": "bibliotherapy",
+  "version": "1.0.0",
+  "description": "Bibliotherapy MERN stack app — Healing Through Books",
+  "scripts": {
+    "server": "cd server && npm start",
+    "client": "cd client && npm start",
+    "dev": "concurrently \"cd server && node index.js\" \"cd client && npm start\"",
+    "install-all": "cd server && npm install && cd ../client && npm install",
+    "postman-test": "echo 'Import bibliotherapy-api.postman_collection.json into Postman'"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

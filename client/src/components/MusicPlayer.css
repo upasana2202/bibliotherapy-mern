@@ -1,0 +1,220 @@
+.music-player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  background: rgba(245, 239, 224, 0.97);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(28, 18, 8, 0.1);
+  box-shadow: 0 -4px 30px rgba(28, 18, 8, 0.12);
+  transition: all 0.3s ease;
+}
+
+/* YouTube iframe container */
+.yt-container {
+  padding: 0.75rem 1rem 0;
+  animation: fadeInUp 0.3s ease;
+}
+
+.yt-container iframe {
+  width: 100%;
+  height: 220px;
+  border: none;
+  border-radius: 10px;
+  display: block;
+}
+
+.player-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1.5rem;
+  flex-wrap: nowrap;
+}
+
+/* 🎵 toggle button */
+.player-toggle-btn {
+  background: var(--ink);
+  color: var(--parchment);
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.player-toggle-btn:hover {
+  background: var(--accent);
+  transform: scale(1.08);
+}
+
+/* Genre dot */
+.player-genre-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+/* Track info */
+.player-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.player-track-name {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-artist {
+  font-size: 0.75rem;
+  color: var(--sage);
+  font-style: italic;
+}
+
+/* Genre badge */
+.player-genre-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.7rem;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--ink);
+}
+
+/* Controls */
+.player-controls {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.ctrl-btn {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.3rem;
+  border-radius: 6px;
+  transition: all 0.2s;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.ctrl-btn:hover {
+  background: rgba(28, 18, 8, 0.08);
+}
+
+.play-btn {
+  background: var(--ink) !important;
+  color: var(--parchment) !important;
+  border-radius: 50% !important;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem !important;
+}
+
+.play-btn.playing {
+  background: var(--accent) !important;
+}
+
+/* Volume */
+.player-volume {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.volume-slider {
+  -webkit-appearance: none;
+  width: 75px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--parchment-dark);
+  outline: none;
+  cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--sage);
+  cursor: pointer;
+}
+
+/* Track dots */
+.track-dots {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.track-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(28, 18, 8, 0.15);
+  transition: all 0.2s;
+}
+
+.track-dot.active {
+  background: var(--accent);
+  transform: scale(1.4);
+}
+
+/* Hint bar */
+.player-hint {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--sage);
+  font-style: italic;
+  padding: 0.2rem;
+  background: rgba(90, 122, 92, 0.06);
+}
+
+@media (max-width: 768px) {
+  .player-genre-badge { display: none; }
+  .player-volume { display: none; }
+  .track-dots { display: none; }
+  .player-bar { gap: 0.5rem; padding: 0.65rem 1rem; }
+}
+
+/* Animated progress bar for live music */
+.player-progress-fill.playing-pulse {
+  width: 100% !important;
+  background: linear-gradient(90deg, var(--sage), var(--gold), var(--accent), var(--sage));
+  background-size: 200% 100%;
+  animation: musicFlow 4s linear infinite;
+}
+
+@keyframes musicFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}

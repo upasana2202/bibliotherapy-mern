@@ -1,0 +1,211 @@
+.profile-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 8rem;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 20px rgba(28,18,8,0.06);
+  border: 1px solid rgba(28,18,8,0.06);
+}
+
+.profile-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--parchment);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.profile-info { flex: 1; }
+.profile-info h1 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+}
+.profile-info p { color: var(--sage); font-size: 0.9rem; }
+.profile-joined { font-style: italic; font-size: 0.82rem !important; margin-top: 0.2rem; }
+
+.profile-logout {
+  background: rgba(239,68,68,0.08);
+  color: #dc2626;
+  border: 1px solid rgba(239,68,68,0.2);
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.profile-logout:hover { background: rgba(239,68,68,0.15); }
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.25rem;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(28,18,8,0.05);
+  border: 1px solid rgba(28,18,8,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.stat-label {
+  font-size: 0.78rem;
+  color: var(--sage);
+  font-family: var(--font-mono);
+}
+
+.profile-section h2 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+
+.profile-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.profile-tab {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1.5px solid rgba(28,18,8,0.1);
+  background: white;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: var(--sage);
+  transition: all 0.2s;
+}
+
+.profile-tab.active {
+  background: var(--tab-color);
+  border-color: var(--tab-color);
+  color: white;
+  font-weight: 600;
+}
+
+.reading-list { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.reading-item {
+  background: white;
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 2px 8px rgba(28,18,8,0.05);
+  border: 1px solid rgba(28,18,8,0.06);
+}
+
+.reading-book-id {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--sage);
+  background: var(--parchment);
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.reading-book-info { flex: 1; }
+.reading-book-info p { font-size: 0.9rem; color: var(--ink); }
+
+.reading-status {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  margin-top: 0.2rem;
+}
+
+.reading-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.reading-actions button {
+  padding: 0.3rem 0.7rem;
+  border-radius: 8px;
+  border: 1px solid rgba(28,18,8,0.1);
+  background: var(--parchment);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--ink);
+}
+
+.reading-actions button:hover { background: var(--ink); color: var(--parchment); }
+.remove-btn { color: #dc2626 !important; border-color: rgba(239,68,68,0.2) !important; }
+.remove-btn:hover { background: rgba(239,68,68,0.1) !important; color: #dc2626 !important; }
+
+.reading-empty {
+  text-align: center;
+  padding: 2rem;
+  color: var(--sage);
+  font-style: italic;
+}
+
+.reading-empty button {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.profile-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--sage);
+}
+
+.profile-empty button {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 1rem;
+}
+
+@media (max-width: 640px) {
+  .profile-stats { grid-template-columns: repeat(2, 1fr); }
+  .profile-header { flex-wrap: wrap; }
+}
